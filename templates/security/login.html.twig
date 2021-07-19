@@ -1,0 +1,74 @@
+{% extends 'frontBase.html.twig' %}
+
+{% block title %}Log in!{% endblock %}
+
+{% block loggedinstat %}
+    {% if loggedin_stat == true %}
+
+                                <li class="nav-item active">
+                                    <a class="nav-link" href="{{ absolute_url(path('app_logout')) }}">Logout</span></a>
+                                </li>
+                            {% else %}
+                                <li class="nav-item active">
+                                    <a class="nav-link" href="{{ absolute_url(path('app_login')) }}">Login</span></a>
+                                </li>
+                                <li class="nav-item active">
+                                    <a class="nav-link" href="{{ absolute_url(path('app_register')) }}">Register</span></a>
+                                </li>
+                            {% endif %}
+{% endblock %}
+
+{% block body %}
+    <div class="container">
+		<div class="card bg-light">
+		<article class="card-body mx-auto" style="max-width: 400px;">
+			<h4 class="card-title mt-3 text-center">Login your Account</h4>
+<form method="post" action="{{ absolute_url(path('app_login')) }}">
+    {% if error %}
+        <div class="alert alert-danger">{{ error.messageKey|trans(error.messageData, 'security') }}</div>
+    {% endif %}
+
+    {% if app.user %}
+        <div class="mb-3">
+            You are logged in as {{ app.user.username }}, <a href="{{ path('app_logout') }}">Logout</a>
+        </div>
+    {% endif %}
+
+    <div class="form-group input-group">
+	<div class="input-group-prepend">
+            <span class="input-group-text"> <i class="fa fa-envelope"></i> </span>
+	</div>
+        <input type="email" value="{{ last_username }}" name="email" id="inputEmail" class="form-control" autocomplete="email" required autofocus>
+    </div> <!-- form-group// -->	
+    <div class="form-group input-group">
+        <div class="input-group-prepend">
+                <span class="input-group-text"> <i class="fa fa-lock"></i> </span>
+        </div>
+        <input type="password" name="password" id="inputPassword" class="form-control" autocomplete="current-password" required>
+    </div> <!-- form-group// -->				                               
+    <input type="hidden" name="_csrf_token"
+           value="{{ csrf_token('authenticate') }}"
+    >
+
+    {#
+        Uncomment this section and add a remember_me option below your firewall to activate remember me functionality.
+        See https://symfony.com/doc/current/security/remember_me.html
+
+        <div class="checkbox mb-3">
+            <label>
+                <input type="checkbox" name="_remember_me"> Remember me
+            </label>
+        </div>
+    #}
+    <div class="form-group">
+        <button class="btn btn-lg btn-primary" type="submit">
+            Sign in
+        </button>
+    </div>
+</form>
+    <p class="text-center">Don't have an account? <a href="register.html" id="toggletext">Signup</a> </p>   
+    	</article>
+		</div> <!-- card.// -->
+
+	</div> 
+{% endblock %}

@@ -1,0 +1,50 @@
+{% extends "adminBase.html.twig"%}
+{% block title %}{{ title }}{% endblock %}
+{% block body %}
+    <h1>Manage Rooms</h1>
+    <a class="btn btn-danger form-group" href="{{ path('rooms_new') }}">Create new</a>
+    <table class="table">
+        <thead>
+            <tr>
+                <th>Name</th>
+                <th>Location</th>
+                <th>Price</th>
+                <th>RoomType</th>
+                <th>IsActive</th>
+                {#<th>CreatedAt</th>
+                <th>CreatedBy</th>
+                <th>UpdatedAt</th>
+                <th>UpdatedBy</th>#}
+                <th>actions</th>
+            </tr>
+        </thead>
+        <tbody>
+        {% for room in rooms %}
+            <tr>
+                <td>{{ room.name }}</td>
+                <td>{{ room.location }}</td>
+                <td>{{ room.price }}</td>
+                <td>{{ room.roomType }}</td>
+                <td>{{ room.isActive }}</td>
+                {#<td>{{ room.createdAt ? room.createdAt|date('Y-m-d H:i:s') : '' }}</td>
+                <td>{{ room.createdBy }}</td>
+                <td>{{ room.updatedAt ? room.updatedAt|date('Y-m-d H:i:s') : '' }}</td>
+                <td>{{ room.updatedBy }}</td>#}
+                <td>
+                    <a class="btn btn-success" href="{{ path('rooms_show', {'id': room.id}) }}">show</a>
+                    <a class="btn btn-warning" href="{{ path('rooms_edit', {'id': room.id}) }}">edit</a>
+                </td>
+            </tr>
+        {% else %}
+            <tr>
+                <td colspan="11">no records found</td>
+            </tr>
+        {% endfor %}
+        </tbody>
+    </table>
+    <br/>
+    <br/>
+    <br/>
+    <br/>
+        
+{% endblock %}

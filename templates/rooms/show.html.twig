@@ -1,0 +1,54 @@
+{% extends "adminBase.html.twig"%}
+{% block title %}{{ title }}{% endblock %}
+
+{% block body %}
+    <h1>Rooms</h1>
+
+    <table class="table">
+        <tbody>
+
+            <tr>
+                <th>Name</th>
+                <td>{{ room.name }}</td>
+            </tr>
+            <tr>
+                <th>Room Location</th>
+                <td>{{ room.location }}</td>
+            </tr>
+            <tr>
+                <th>Price</th>
+                <td>{{ room.price }}</td>
+            </tr>
+            <tr>
+                <th>Room Type</th>
+                <td>{{ room.roomType }}</td>
+            </tr>
+            <tr>
+                <th>Is Active?</th>
+                <td>{{ room.isActive }}</td>
+            </tr>
+            <tr>
+                <th>Created At</th>
+                <td>{{ room.createdAt ? room.createdAt|date('Y-m-d H:i:s') : '' }}</td>
+            </tr>
+            <tr>
+                <th>Created By</th>
+                <td>{{ room.createdBy }}</td>
+            </tr>
+            <tr>
+                <th>Updated At</th>
+                <td>{{ room.updatedAt ? room.updatedAt|date('Y-m-d H:i:s') : '' }}</td>
+            </tr>
+            <tr>
+                <th>Updated By</th>
+                <td>{{ room.updatedBy }}</td>
+            </tr>
+        </tbody>
+    </table>
+
+    <a href="{{ path('rooms_index') }}">back to list</a>
+
+    <a href="{{ path('rooms_edit', {'id': room.id}) }}">edit</a>
+
+    {{ include('rooms/_delete_form.html.twig') }}
+{% endblock %}

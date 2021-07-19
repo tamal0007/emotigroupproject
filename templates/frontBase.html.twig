@@ -1,0 +1,253 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="UTF-8">
+        <title>{% block title %}Welcome!{% endblock %}</title>
+        {# Run `composer require symfony/webpack-encore-bundle`
+           and uncomment the following Encore helpers to start using Symfony UX #}
+        {% block stylesheets %}
+            {#{{ encore_entry_link_tags('app') }}#}
+        {% endblock %}
+
+        {% block javascripts %}
+            {#{{ encore_entry_script_tags('app') }}#}
+        {% endblock %}
+
+
+        <script type="text/javascript" src="https://cdn.jsdelivr.net/jquery/latest/jquery.min.js"></script>
+
+
+        <link href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" rel="stylesheet" id="bootstrap-css">
+        <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js"></script>
+        <!------ Include the above in your HEAD tag ---------->
+
+        <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.0.8/css/all.css">
+
+        <script src="{{ absolute_url(asset('js/bootstrap-datepicker.js')) }}" type="text/javascript"></script>
+        <script src="{{ absolute_url(asset('js/bootstrap-datepicker.min.js')) }}" type="text/javascript"></script>
+        <!------ Include the above in your HEAD tag ---------->
+
+
+        <link href="https://fonts.googleapis.com/css?family=Roboto:100,100i,300,300i,400,400i,500,500i,700,700i,900,900i" rel="stylesheet">
+        <link rel="stylesheet" href="{{ absolute_url(asset('css/bootstrap-datepicker.min.css')) }}" />
+
+        <script type="text/javascript" src="https://cdn.jsdelivr.net/momentjs/latest/moment.min.js"></script>
+        <script type="text/javascript" src="https://cdn.jsdelivr.net/npm/daterangepicker/daterangepicker.min.js"></script>
+        <link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/npm/daterangepicker/daterangepicker.css" />
+
+        <script>
+
+            /*date range picker settings [start]*/
+            $(function () {
+                $('#sandbox-container .input').datepicker({
+                    todayBtn: "linked",
+                    clearBtn: true,
+                    multidateSeparator: "-",
+                    daysOfWeekDisabled: "6",
+                    daysOfWeekHighlighted: "5",
+                    autoclose: true,
+                    datesDisabled: ['07/06/2021', '07/21/2021'],
+                    toggleActive: true
+                });
+            });
+            /*date range picker settings [end]*/
+
+            /*.............[start]*/
+            $(function () {
+                $('input[name="dates"]').daterangepicker({
+                    timePicker: false,
+                    //startDate: moment().startOf('hour'),
+                    //endDate: moment().startOf('hour').add(32, 'hour'),
+                    locale: {
+                        format: 'YYYY/MM/DD'
+                    }
+                });
+            });
+            /*.............[end]*/
+        </script>
+
+        <style>
+            
+            .cal_available_room_count
+            {
+                font-size: 10px;
+            }
+            .card {
+                margin: 20px 0px;
+            }
+            /*full booked indicator class*/
+            .full_booked_date{
+                background-color: red !important;
+            }
+
+            /*full today's indicator class*/
+            .todays_date{
+                color: green !important;
+                font-weight: bolder !important;
+            }
+
+            /* php calender style [start]*/
+            /*******************************Calendar Top Navigation*********************************/
+            div#calendar{
+                margin:0px auto;
+                padding:0px;
+                width: 602px;
+                font-family:Helvetica, "Times New Roman", Times, serif;
+            }
+
+            div#calendar div.box{
+                position:relative;
+                top:0px;
+                left:0px;
+                width:100%;
+                height:40px;
+                background-color:   #787878 ;      
+            }
+
+            div#calendar div.header{
+                line-height:40px;  
+                vertical-align:middle;
+                position:absolute;
+                left:11px;
+                top:0px;
+                width:582px;
+                height:40px;   
+                text-align:center;
+            }
+
+            div#calendar div.header a.prev,div#calendar div.header a.next{ 
+                position:absolute;
+                top:0px;   
+                height: 17px;
+                display:block;
+                cursor:pointer;
+                text-decoration:none;
+                color:#FFF;
+            }
+
+            div#calendar div.header span.title{
+                color:#FFF;
+                font-size:18px;
+            }
+
+
+            div#calendar div.header a.prev{
+                left:0px;
+            }
+
+            div#calendar div.header a.next{
+                right:0px;
+            }
+
+
+
+
+            /*******************************Calendar Content Cells*********************************/
+            div#calendar div.box-content{
+                border:1px solid #787878 ;
+                border-top:none;
+            }
+
+
+
+            div#calendar ul.label{
+                float:left;
+                margin: 0px;
+                padding: 0px;
+                margin-top:5px;
+                margin-left: 5px;
+            }
+
+            div#calendar ul.label li{
+                margin:0px;
+                padding:0px;
+                margin-right:5px;  
+                float:left;
+                list-style-type:none;
+                width:80px;
+                height:40px;
+                line-height:40px;
+                vertical-align:middle;
+                text-align:center;
+                color:#000;
+                font-size: 15px;
+                background-color: transparent;
+            }
+
+
+            div#calendar ul.dates{
+                float:left;
+                margin: 0px;
+                padding: 0px;
+                margin-left: 5px;
+                margin-bottom: 5px;
+            }
+
+            /** overall width = width+padding-right**/
+            div#calendar ul.dates li{
+                margin:0px;
+                padding:0px;
+                margin-right:5px;
+                margin-top: 5px;
+                line-height:80px;
+                vertical-align:middle;
+                float:left;
+                list-style-type:none;
+                width:80px;
+                height:80px;
+                font-size:25px;
+                background-color: #DDD;
+                color:#000;
+                text-align:center; 
+            }
+
+            :focus{
+                outline:none;
+            }
+
+            div.clear{
+                clear:both;
+            }      
+
+            /* php calender style [end]*/
+            .footer {
+{#                position: fixed;#}
+                bottom: 0;
+                width: 100%;
+                height: 60px;
+                line-height: 60px;
+                background-color: #f5f5f5;
+            }
+        </style>
+    </head>
+    <body>
+        <div class="container">
+            <header>
+                <nav class="navbar navbar-expand-lg navbar-light" style="background-color: #e3f2fd;">
+                    <a class="navbar-brand" href="#">Booking System</a>
+                    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarColor03" aria-controls="navbarColor03" aria-expanded="false" aria-label="Toggle navigation">
+                        <span class="navbar-toggler-icon"></span>
+                    </button>
+
+                    <div class="collapse navbar-collapse" id="navbarColor03">
+                        <ul class="navbar-nav mr-auto">
+                            <li class="nav-item active">
+                                <a class="nav-link" href="{{ absolute_url(path('front')) }}">Home <span class="sr-only">(current)</span></a>
+                            </li>
+                            
+                            {% block loggedinstat %}{% endblock %}
+
+                        </ul>
+                    </div>
+                </nav>
+            </header>
+        {% block body %}{% endblock %}
+
+    </div>
+    <footer class="footer">
+        <div class="container">
+            <span class="text-muted">This is booking System.</span>
+        </div>
+    </footer>
+</body>
+</html>

@@ -1,0 +1,49 @@
+{% extends "frontBase.html.twig"%}
+
+
+{% block loggedinstat %}
+    {% if loggedin_stat == true %}
+
+        <li class="nav-item active">
+            <a class="nav-link" href="{{ absolute_url(path('app_logout')) }}">Logout</span></a>
+        </li>
+    {% else %}
+        <li class="nav-item active">
+            <a class="nav-link" href="{{ absolute_url(path('app_login')) }}">Login</span></a>
+        </li>
+        <li class="nav-item active">
+            <a class="nav-link" href="{{ absolute_url(path('app_register')) }}">Register</span></a>
+        </li>
+    {% endif %}
+{% endblock %}
+
+{% block body %}
+    <br/>
+    <br/>
+
+    <form action="{{ absolute_url(path('search')) }}" method="post">
+        <div id="wrap" class="row">
+            <div class="form-group input-group col-md-4">
+            <input class="input-sm form-control" type="text" name="dates" />
+            </div>
+            
+            <div class="form-group input-group col-md-4">
+            <button type="submit" class="btn btn-success">Search Room</button>
+            </div>
+            <div style="clear:both"></div>
+        </div>
+    </form>
+    <br/>
+<div>
+            <span class="badge badge-danger">Fully Occupied</span> 
+            <span class="badge badge-secondary">Partly Occupied</span>  
+            <span class="badge badge-success">Todays Date</span> 
+        </div>
+    <br/>
+    {{calender.show()|raw}}
+    <br/>
+    <br/>
+    <br/>
+
+{% endblock %}
+

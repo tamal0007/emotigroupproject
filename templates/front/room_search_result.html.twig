@@ -1,0 +1,49 @@
+{% extends "frontBase.html.twig"%}
+{% block loggedinstat %}
+    {% if loggedin_stat == true %}
+
+        <li class="nav-item active">
+            <a class="nav-link" href="{{ absolute_url(path('app_logout')) }}">Logout</span></a>
+        </li>
+    {% else %}
+        <li class="nav-item active">
+            <a class="nav-link" href="{{ absolute_url(path('app_login')) }}">Login</span></a>
+        </li>
+        <li class="nav-item active">
+            <a class="nav-link" href="{{ absolute_url(path('app_register')) }}">Register</span></a>
+        </li>
+    {% endif %}
+{% endblock %}
+{% block body %}
+    <div class="row" style="margin-top: 20px">
+        <div>
+            Search result from {{start_date}} to {{end_date}}
+        </div>
+        <table class="table">
+            <thead>
+                <tr>
+                    <th>Room Name</th>
+                    <th>Room Price</th>
+                    <th>Action</th>
+                </tr>
+            </thead>
+            <tbody>
+                {% if room_search_result|length > 0%}
+                    {% for room in room_search_result %}
+                        <tr>
+                            <td>{{ room.name }}</td>
+                            <td>${{ room.price }}</td>
+                            <td>
+                                <a class="btn btn-success" href="{{ absolute_url(path('confirmvacancy',{'vac_id':room.id,'start_date':start_date,'end_date':end_date})) }}"  onclick="return confirm('Are you sure Booking {{ room.name|capitalize }} from {{start_date}} to {{end_date}}?');">Book Vacancy</a>
+                            </td>
+                            {#                {{ app.user.id }}#}
+                    {% endfor %}
+                    {% else %}
+                    <tr>
+                        <td>Sorry there is no rooms available from {{ app.request.get('dates')  }}</td>
+                    </tr>
+            {% endif %}
+        </table>
+    </div>
+
+{% endblock %}

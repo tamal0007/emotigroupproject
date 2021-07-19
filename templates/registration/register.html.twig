@@ -1,0 +1,53 @@
+{% extends 'frontBase.html.twig' %}
+
+{% block title %}Register{% endblock %}
+
+
+{% block loggedinstat %}
+    {% if loggedin_stat == true %}
+
+        <li class="nav-item active">
+            <a class="nav-link" href="{{ absolute_url(path('app_logout')) }}">Logout</span></a>
+    </li>
+{% else %}
+    <li class="nav-item active">
+        <a class="nav-link" href="{{ absolute_url(path('app_login')) }}">Login</span></a>
+</li>
+<li class="nav-item active">
+    <a class="nav-link" href="{{ absolute_url(path('app_register')) }}">Register</span></a>
+</li>
+{% endif %}
+{% endblock %}
+
+{% block body %}
+    <div class="container">
+        <div class="card bg-light">
+            <article class="card-body mx-auto" style="max-width: 400px;">
+                <h4 class="card-title mt-3 text-center">Create Account</h4>
+                <p class="text-center">Get started with your free account</p>
+                {{ form_start(registrationForm) }}
+                <div class="form-group input-group">
+                    <div class="input-group-prepend">
+                        <span class="input-group-text"> <i class="fa fa-envelope"></i> </span>
+                    </div>
+                    {{ form_row(registrationForm.email) }}
+                </div> <!-- form-group// -->
+                <div class="form-group input-group">
+                    <div class="input-group-prepend">
+                        <span class="input-group-text"> <i class="fa fa-lock"></i> </span>
+                    </div>
+                    {{ form_row(registrationForm.plainPassword, {
+            label: false
+        }) }}
+                </div> <!-- form-group// -->
+                {{ form_row(registrationForm.agreeTerms) }}
+                <div class="form-group">
+                    <button type="submit" class="btn btn-primary btn-block"> Create Account  </button>
+                </div>
+                {{ form_end(registrationForm) }}
+                <p class="text-center">Have an account? <a href="{{ absolute_url(path('app_login')) }}" id="toggletext">Log In</a> </p>   
+            </article>
+        </div> <!-- card.// -->
+
+    </div> 
+{% endblock %}
