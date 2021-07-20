@@ -41,10 +41,6 @@ class FrontController extends AbstractController {
         $query_reserved_dates = $stmt->fetchAllAssociative();
 
         $room = $rooms_repository->findBy(['isActive' => 1,]);
-
-        $date_extractor = function($array) {
-            return end($array);
-        };
         
         $date_wise_vac_occupied = [];
         
@@ -55,11 +51,8 @@ class FrontController extends AbstractController {
                                                                 ];
         });
         
-        //$full_reserved_dates = array_map($date_extractor, $query_reserved_dates);
 
         $calendar = new Calender_($date_wise_vac_occupied,count($room));
-
-        //echo $calendar->show();
 
 
         return $this->render('front/front_home.html.twig', ['calender' => $calendar, 'loggedin_stat' => $this->isGranted('ROLE_USER')]);
@@ -86,9 +79,6 @@ class FrontController extends AbstractController {
             $user = $this->get('security.token_storage')->getToken()->getUser();
             $user_id = $user->getId();
 
-
-            /**/
-
             //....entity manager
             $em = $this->getDoctrine()->getManager();
             $conn = $em->getConnection();
@@ -98,8 +88,6 @@ class FrontController extends AbstractController {
 
             $qb = $em->createQueryBuilder();
             $qb->select('count(*)');
-
-
 
             $sql = "
             select room_id from reservation_dates
@@ -114,8 +102,6 @@ class FrontController extends AbstractController {
 
             // returns an array of arrays (i.e. a raw data set)
             $room_search_result = $stmt->fetchAllAssociative();
-
-
 
             if ($room && count($room_search_result) <= 0) {
 

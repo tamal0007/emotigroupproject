@@ -21,11 +21,9 @@ class AdminController extends AbstractController {
         $em = $this->getDoctrine()->getManager();
         $conn = $em->getConnection();
 
-        //echo date('');
         $todays_sales = '';
-        $calendar = '';
-        $todays_total_empty_rooms = '';
-        $total_rooms = '';
+        $todays_total_empty_rooms = 0;
+        $total_rooms = [];
 
 
         /* total active users [start] */
@@ -102,11 +100,11 @@ class AdminController extends AbstractController {
 
         return $this->render(
                         'admin/dashboard.html.twig', ['calender' => $calendar,
-                    'todays_sales' => $todays_sales,
-                    'todays_total_empty_rooms' => $todays_total_empty_rooms,
-                    'total_rooms' => count($total_rooms),
-                    'loggedin_stat' => $this->isGranted('ROLE_USER'),
-                    'total_customers' => $query_total_customer,
+                        'todays_sales' => $todays_sales,
+                        'todays_total_empty_rooms' => $todays_total_empty_rooms,
+                        'total_rooms' => count($total_rooms),
+                        'loggedin_stat' => $this->isGranted('ROLE_USER'),
+                        'total_customers' => $query_total_customer,
         ]);
     }
 
