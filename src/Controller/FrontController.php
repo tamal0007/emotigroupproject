@@ -61,15 +61,6 @@ class FrontController extends AbstractController {
 
         //echo $calendar->show();
 
-        /*
-          if ($this->isGranted('ROLE_USER') == false)
-          {
-          // show some error message, throw exception etc...
-          echo "not logged in";
-          }else if($this->isGranted('ROLE_USER') == TRUE){
-          echo "logged in";
-          }
-         */
 
         return $this->render('front/front_home.html.twig', ['calender' => $calendar, 'loggedin_stat' => $this->isGranted('ROLE_USER')]);
     }
@@ -102,11 +93,6 @@ class FrontController extends AbstractController {
             $em = $this->getDoctrine()->getManager();
             $conn = $em->getConnection();
 
-
-            //$product = $this->getDoctrine()
-            //->getRepository(Rooms::class)
-            //->find($room_id);
-            //$room_repository = $this->getDoctrine()->getRepository(Rooms::class);
             //.... query through repository
             $room = $rooms_repository->findOneBy(['id' => $room_id, 'isActive' => 1,]); // if room is active
 

@@ -39,12 +39,7 @@ class AdminController extends AbstractController {
         $stmt_total_customer = $conn->prepare($total_customer_sql);
         $stmt_total_customer->execute();
         $query_total_customer = $stmt_total_customer->fetchAllAssociative();
-//        $total_customer = $query_total_customer[0]['total_rooms'];
-         //dump($query_total_customer);exit;
-        //$user_repository = $user_repository->findBy(['isActive' => 1,]);
-        /* total active users [end] */
-        
-        
+      
         /* total active room count [end] */
 
         /*get all active rooms[start]*/
@@ -92,12 +87,6 @@ class AdminController extends AbstractController {
         $stmt->execute(['start_date' => $first_date_of_month, 'end_date' => $last_date_of_month]);
         $query_reserved_dates = $stmt->fetchAllAssociative();
 
-        /*
-          $date_extractor = function($array) {
-          return end($array);
-          };
-          $full_reserved_dates = array_map($date_extractor, $query_reserved_dates);
-         */
         $date_wise_vac_occupied = [];
 
         array_walk($query_reserved_dates, function($val, $key) use(&$date_wise_vac_occupied) {
